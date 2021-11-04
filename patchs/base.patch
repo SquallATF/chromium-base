@@ -55,6 +55,18 @@ index 8a49f08dcb..050cd68c44 100644
  #include "base/hash/md5_nacl.h"
  #else
  #include "base/hash/md5_boringssl.h"
+diff --git a/base/hash/md5_nacl.cc b/base/hash/md5_nacl.cc
+index 827bbbdbb0..4b22c59d9e 100644
+--- a/base/hash/md5_nacl.cc
++++ b/base/hash/md5_nacl.cc
+@@ -22,6 +22,7 @@
+  */
+ 
+ #include <stddef.h>
++#include <string.h>
+ 
+ #include "base/hash/md5.h"
+ 
 diff --git a/base/hash/sha1.h b/base/hash/sha1.h
 index 5bb10fe069..e773ddf74c 100644
 --- a/base/hash/sha1.h

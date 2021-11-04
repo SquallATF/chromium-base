@@ -22,6 +22,7 @@
  */
 
 #include <stddef.h>
+#include <string.h>
 
 #include "base/hash/md5.h"
 
