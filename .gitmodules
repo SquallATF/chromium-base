@@ -1,0 +1,21 @@
+[submodule "src/buildtools/third_party/libc++/trunk"]
+	path = src/buildtools/third_party/libc++/trunk
+	url = https://chromium.googlesource.com/external/github.com/llvm/llvm-project/libcxx.git
+[submodule "src/buildtools/third_party/libc++abi/trunk"]
+	path = src/buildtools/third_party/libc++abi/trunk
+	url = https://chromium.googlesource.com/external/github.com/llvm/llvm-project/libcxxabi.git
+[submodule "src/buildtools/third_party/libunwind/trunk"]
+	path = src/buildtools/third_party/libunwind/trunk
+	url = https://chromium.googlesource.com/external/github.com/llvm/llvm-project/libunwind.git
+[submodule "src/third_party/icu"]
+	path = src/third_party/icu
+	url = https://chromium.googlesource.com/chromium/deps/icu.git
+[submodule "src/third_party/catapult"]
+	path = src/third_party/catapult
+	url = https://chromium.googlesource.com/catapult.git
+[submodule "third_party/googletest/src"]
+	path = src/third_party/googletest/src
+	url = https://chromium.googlesource.com/external/github.com/google/googletest.git
+[submodule "src/third_party/ced/src"]
+	path = src/third_party/ced/src
+	url = https://chromium.googlesource.com/external/github.com/google/compact_enc_det.git

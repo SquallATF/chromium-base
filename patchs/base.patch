@@ -1,0 +1,105 @@
+diff --git a/base/BUILD.gn b/base/BUILD.gn
+index 336ce46f03..cc0d2a8c60 100644
+--- a/base/BUILD.gn
++++ b/base/BUILD.gn
+@@ -162,6 +162,13 @@ config("perfetto_config") {
+ # This does not include test code (test support and anything in the test
+ # directory) which should use source_set as is recommended for GN targets).
+ component("base") {
++  output_name = "chromium_base"
++
++  if (!is_component_build) {
++    complete_static_lib = true
++    configs -= [ "//build/config/compiler:thin_archive" ]
++  }
++
+   sources = [
+     "allocator/allocator_check.cc",
+     "allocator/allocator_check.h",
+@@ -1767,7 +1774,7 @@ component("base") {
+     "hash/md5_constexpr_internal.h",
+     "hash/sha1.h",
+   ]
+-  if (is_nacl) {
++  if (true) {
+     sources += [
+       "hash/md5_nacl.cc",
+       "hash/md5_nacl.h",
+@@ -2532,6 +2539,7 @@ buildflag_header("profiler_buildflags") {
+ # library. Note that this library cannot depend on base because base depends on
+ # base_static.
+ static_library("base_static") {
++  output_name = "chromium_base_static"
+   sources = [
+     "base_switches.cc",
+     "base_switches.h",
+@@ -2561,7 +2569,7 @@ static_library("base_static") {
+ }
+ 
+ component("i18n") {
+-  output_name = "base_i18n"
++  output_name = "chromium_base_i18n"
+   sources = [
+     "i18n/base_i18n_export.h",
+     "i18n/base_i18n_switches.cc",
+diff --git a/base/hash/md5.h b/base/hash/md5.h
+index 8a49f08dcb..050cd68c44 100644
+--- a/base/hash/md5.h
++++ b/base/hash/md5.h
+@@ -11,7 +11,7 @@
+ #include "base/strings/string_piece.h"
+ #include "build/build_config.h"
+ 
+-#if defined(OS_NACL)
++#if 1
+ #include "base/hash/md5_nacl.h"
+ #else
+ #include "base/hash/md5_boringssl.h"
+diff --git a/base/hash/sha1.h b/base/hash/sha1.h
+index 5bb10fe069..e773ddf74c 100644
+--- a/base/hash/sha1.h
++++ b/base/hash/sha1.h
+@@ -14,7 +14,7 @@
+ #include "base/containers/span.h"
+ #include "base/strings/string_piece.h"
+ #include "build/build_config.h"
+-#if defined(OS_NACL)
++#if 1
+ #include "base/hash/sha1_nacl.h"
+ #else
+ #include "base/hash/sha1_boringssl.h"
+diff --git a/base/unguessable_token.cc b/base/unguessable_token.cc
+index d156be5597..ef3e3e4ab2 100644
+--- a/base/unguessable_token.cc
++++ b/base/unguessable_token.cc
+@@ -10,7 +10,7 @@
+ #include "base/rand_util.h"
+ #include "build/build_config.h"
+ 
+-#if !defined(OS_NACL)
++#if 0
+ #include "third_party/boringssl/src/include/openssl/mem.h"
+ #endif
+ 
+@@ -41,7 +41,7 @@ UnguessableToken UnguessableToken::Deserialize(uint64_t high, uint64_t low) {
+ }
+ 
+ bool UnguessableToken::operator==(const UnguessableToken& other) const {
+-#if defined(OS_NACL)
++#if 1
+   // BoringSSL is unavailable for NaCl builds so it remains timing dependent.
+   return token_ == other.token_;
+ #else
+diff --git a/build/config/BUILDCONFIG.gn b/build/config/BUILDCONFIG.gn
+index 62e7e4bcd3..027eaab739 100644
+--- a/build/config/BUILDCONFIG.gn
++++ b/build/config/BUILDCONFIG.gn
+@@ -342,7 +342,7 @@ default_compiler_configs = [
+ if (is_win) {
+   default_compiler_configs += [
+     "//build/config/win:default_cfg_compiler",
+-    "//build/config/win:default_crt",
++    "//build/config/win:dynamic_crt",
+     "//build/config/win:lean_and_mean",
+     "//build/config/win:nominmax",
+     "//build/config/win:unicode",
