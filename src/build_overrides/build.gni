@@ -1,0 +1,26 @@
+import("//build/config/gclient_args.gni")
+
+# Some non-Chromium builds don't support building java targets.
+enable_java_templates = true
+
+declare_args() {
+  # Tracing requires //third_party/perfetto.
+  enable_base_tracing = false
+
+  use_perfetto_client_library = false
+  
+  # Allows googletest to pretty-print various absl types.  Disabled for nacl due
+  # to lack of toolchain support.
+  gtest_enable_absl_printers = !is_nacl
+}
+
+# Don't use Chromium's third_party/binutils.
+linux_use_bundled_binutils_override = false
+
+declare_args() {
+  # Skip assertions about 4GiB file size limit. See https://crbug.com/648948.
+  ignore_elf32_limitations = false
+}
+
+# Use the system install of Xcode for tools like ibtool, libtool, etc.
+use_system_xcode = true
