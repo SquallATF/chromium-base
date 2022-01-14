@@ -1,5 +1,5 @@
 diff --git a/base/BUILD.gn b/base/BUILD.gn
-index 336ce46f03..cc0d2a8c60 100644
+index 7c1c51e1a4..9408954cb4 100644
 --- a/base/BUILD.gn
 +++ b/base/BUILD.gn
 @@ -162,6 +162,13 @@ config("perfetto_config") {
@@ -16,7 +16,7 @@ index 336ce46f03..cc0d2a8c60 100644
    sources = [
      "allocator/allocator_check.cc",
      "allocator/allocator_check.h",
-@@ -1767,7 +1774,7 @@ component("base") {
+@@ -1784,7 +1791,7 @@ component("base") {
      "hash/md5_constexpr_internal.h",
      "hash/sha1.h",
    ]
@@ -25,7 +25,7 @@ index 336ce46f03..cc0d2a8c60 100644
      sources += [
        "hash/md5_nacl.cc",
        "hash/md5_nacl.h",
-@@ -2532,6 +2539,7 @@ buildflag_header("profiler_buildflags") {
+@@ -2554,6 +2561,7 @@ buildflag_header("profiler_buildflags") {
  # library. Note that this library cannot depend on base because base depends on
  # base_static.
  static_library("base_static") {
@@ -33,7 +33,7 @@ index 336ce46f03..cc0d2a8c60 100644
    sources = [
      "base_switches.cc",
      "base_switches.h",
-@@ -2561,7 +2569,7 @@ static_library("base_static") {
+@@ -2583,7 +2591,7 @@ static_library("base_static") {
  }
  
  component("i18n") {
@@ -102,16 +102,3 @@ index d156be5597..ef3e3e4ab2 100644
    // BoringSSL is unavailable for NaCl builds so it remains timing dependent.
    return token_ == other.token_;
  #else
-diff --git a/build/config/BUILDCONFIG.gn b/build/config/BUILDCONFIG.gn
-index 62e7e4bcd3..027eaab739 100644
---- a/build/config/BUILDCONFIG.gn
-+++ b/build/config/BUILDCONFIG.gn
-@@ -342,7 +342,7 @@ default_compiler_configs = [
- if (is_win) {
-   default_compiler_configs += [
-     "//build/config/win:default_cfg_compiler",
--    "//build/config/win:default_crt",
-+    "//build/config/win:dynamic_crt",
-     "//build/config/win:lean_and_mean",
-     "//build/config/win:nominmax",
-     "//build/config/win:unicode",

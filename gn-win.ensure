@@ -1,4 +1,4 @@
 $ParanoidMode CheckPresence
 
 @Subdir src/buildtools/win
-gn/gn/windows-amd64 git_revision:0153d369bbccc908f4da4993b1ba82728055926a
+gn/gn/windows-amd64 git_revision:90294ccdcf9334ed25a76ac9b67689468e506342
